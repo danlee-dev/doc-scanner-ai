@@ -243,6 +243,7 @@ tqdm
 | ----------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------- |
 | <img src="https://avatars.githubusercontent.com/KangMinSun" width="160px" alt="Minsun Kang" /> | <img src="https://avatars.githubusercontent.com/danlee-dev" width="160px" alt="Seongmin Lee" /> |
 | [GitHub: @KangMinSun](https://github.com/KangMinSun)                                           | [GitHub: @danlee-dev](https://github.com/danlee-dev)                                           |
+| 백엔드, AI/ML                                                                                   | 프론트엔드, AI/ML                                                                               |
 | 고려대학교 컴퓨터학과                                                                           | 고려대학교 컴퓨터학과                                                                           |
 
 ## 라이선스
