@@ -11,11 +11,8 @@ on:
       - main
 
 jobs:
-  sync-develop:
-    if: |
-      (github.event_name == 'push' || github.event.pull_request.merged == true) &&
-      !contains(github.event.head_commit.message, 'chore: sync develop with main') &&
-      github.actor != 'github-actions[bot]'
+  sync:
+    if: github.event_name == 'push' || (github.event.pull_request.merged == true)
     runs-on: ubuntu-latest
 
     steps:
@@ -33,7 +30,6 @@ jobs:
       - name: Sync develop branch
         run: |
           git fetch origin main
-          git fetch origin develop
           git checkout develop
-          git merge origin/main --no-ff -m "chore: sync develop with main"
+          git merge origin/main --no-edit
           git push origin develop
