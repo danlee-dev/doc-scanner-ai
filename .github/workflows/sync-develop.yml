@@ -12,7 +12,10 @@ on:
 
 jobs:
   sync-develop:
-    if: github.event_name == 'push' || (github.event.pull_request.merged == true)
+    if: |
+      (github.event_name == 'push' || github.event.pull_request.merged == true) &&
+      !contains(github.event.head_commit.message, 'chore: sync develop with main') &&
+      github.actor != 'github-actions[bot]'
     runs-on: ubuntu-latest
 
     steps:
