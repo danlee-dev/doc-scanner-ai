@@ -1,0 +1,104 @@
+@import url('https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable.min.css');
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  /* 브랜드 컬러 시스템 - 청록 계열 */
+  --brand-900: 185 43% 26%;        /* #275F63 */
+  --brand-800: 194 56% 39%;        /* #38818D */
+  --brand-700: 193 59% 44%;        /* #4295A5 */
+  --brand-600: 193 58% 51%;        /* #4CAABE */
+  --brand-500: 192 60% 58%;        /* #54BAD1 */
+  --brand-400: 191 59% 63%;        /* #5FC4D7 */
+  --brand-300: 190 60% 68%;        /* #73CEDE */
+  --brand-200: 189 64% 75%;        /* #96DCE8 */
+  --brand-100: 188 73% 84%;        /* #BEEAF1 */
+  --brand-50: 187 86% 93%;         /* #E4F6F9 */
+
+  /* 기본 색상 */
+  --background: 0 0% 96%;
+  --foreground: 240 10% 3.9%;
+  --card: 0 0% 100%;
+  --card-foreground: 240 10% 3.9%;
+  --popover: 0 0% 100%;
+  --popover-foreground: 240 10% 3.9%;
+
+  /* 주요 색상 - 브랜드 컬러 적용 */
+  --primary: var(--brand-600);
+  --primary-foreground: 0 0% 100%;
+  --secondary: var(--brand-100);
+  --secondary-foreground: var(--brand-800);
+
+  /* 시스템 색상 */
+  --muted: var(--brand-50);
+  --muted-foreground: var(--brand-700);
+  --accent: var(--brand-100);
+  --accent-foreground: var(--brand-800);
+  --destructive: 0 84% 60%;
+  --destructive-foreground: 0 0% 98%;
+
+  /* 경계선 및 입력 */
+  --border: var(--brand-200);
+  --input: var(--brand-100);
+  --ring: var(--brand-600);
+
+  /* 아이폰 스타일 반경 */
+  --radius: 1rem;
+  --radius-lg: 1.25rem;
+  --radius-md: 0.75rem;
+  --radius-sm: 0.5rem;
+}
+
+
+* {
+  border-color: hsl(var(--border));
+}
+
+body {
+  color: hsl(var(--foreground));
+  background: hsl(var(--background));
+  font-family: 'Pretendard Variable', ui-sans-serif, system-ui, sans-serif;
+}
+
+@layer base {
+  h1 {
+    @apply scroll-m-20 text-4xl font-extrabold tracking-tight;
+  }
+  h2 {
+    @apply scroll-m-20 border-b pb-2 text-3xl font-semibold tracking-tight first:mt-0;
+  }
+  h3 {
+    @apply scroll-m-20 text-2xl font-semibold tracking-tight;
+  }
+  h4 {
+    @apply scroll-m-20 text-xl font-semibold tracking-tight;
+  }
+  p {
+    @apply leading-7 [&:not(:first-child)]:mt-6;
+  }
+  blockquote {
+    @apply mt-6 border-l-2 pl-6 italic;
+  }
+  ul {
+    @apply my-6 ml-6 list-disc [&>li]:mt-2;
+  }
+  ol {
+    @apply my-6 ml-6 list-decimal [&>li]:mt-2;
+  }
+  code {
+    @apply relative rounded bg-muted px-[0.3rem] py-[0.2rem] font-mono text-sm font-semibold;
+  }
+  table {
+    @apply w-full;
+  }
+  tr {
+    @apply m-0 border-t p-0 even:bg-muted;
+  }
+  th {
+    @apply border px-4 py-2 text-left font-bold [&[align=center]]:text-center [&[align=right]]:text-right;
+  }
+  td {
+    @apply border px-4 py-2 text-left [&[align=center]]:text-center [&[align=right]]:text-right;
+  }
+}
