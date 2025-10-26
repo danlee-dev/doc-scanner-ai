@@ -239,7 +239,7 @@ tqdm
 
 ## 참여자
 
-| 강민선 (Minsun Kang)                                                                            | 이성민 (Seongmin Lee)                                                                           |
+| 강민선 (Minsun Kang) - 팀장                                                                     | 이성민 (Seongmin Lee)                                                                           |
 | ----------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------- |
 | <img src="https://avatars.githubusercontent.com/KangMinSun" width="160px" alt="Minsun Kang" /> | <img src="https://avatars.githubusercontent.com/danlee-dev" width="160px" alt="Seongmin Lee" /> |
 | [GitHub: @KangMinSun](https://github.com/KangMinSun)                                           | [GitHub: @danlee-dev](https://github.com/danlee-dev)                                           |
