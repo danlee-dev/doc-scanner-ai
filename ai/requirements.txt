@@ -3,6 +3,7 @@ cffi==2.0.0
 charset-normalizer==3.4.4
 cryptography==46.0.3
 filelock==3.20.0
+python-dotenv==1.0.0
 fsspec==2025.9.0
 hf-xet==1.2.0
 huggingface-hub==0.36.0
