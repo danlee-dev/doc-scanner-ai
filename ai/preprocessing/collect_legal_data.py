@@ -37,6 +37,13 @@ class LegalDataCollector:
             "퇴직금",
             "해고",
             "임금",
+            "연차",
+            "근로시간",
+            "휴게시간",
+            "휴일",
+            "연장근로",
+            "통상임금",
+            "수습기간",
         ]
 
     def _request_api(self, url: str, params: Dict) -> Optional[Dict]:
@@ -242,7 +249,7 @@ class LegalDataCollector:
 
             params = {
                 "OC": self.user_id,
-                "target": "moel",
+                "target": "moelCgmExpc",  # 수정: moel -> moelCgmExpc
                 "type": "JSON",
                 "query": keyword,
                 "display": 100,
@@ -265,16 +272,16 @@ class LegalDataCollector:
 
             # 목록 수집
             items = []
-            total_pages = min((total_cnt // 100) + 1, 5)  # 최대 500건
+            total_pages = min((total_cnt // 100) + 1, 3)  # 최대 300건
             for page in range(1, total_pages + 1):
                 params['page'] = page
                 page_response = self._request_api(self.search_url, params)
                 page_data = self._extract_data(page_response)
 
-                if not page_data or 'moel' not in page_data:
+                if not page_data or 'cgmExpc' not in page_data:  # 수정: moel -> cgmExpc
                     break
 
-                page_items = page_data['moel']
+                page_items = page_data['cgmExpc']  # 수정: moel -> cgmExpc
                 if not isinstance(page_items, list):
                     page_items = [page_items]
 
@@ -422,12 +429,12 @@ class LegalDataCollector:
             f"labor_ministry_{datetime.now().strftime('%Y%m%d')}.json"
         )
 
-        # 4. 노동위원회
-        labor_commission = self.collect_labor_commission()
-        self.save_data(
-            labor_commission,
-            f"labor_commission_{datetime.now().strftime('%Y%m%d')}.json"
-        )
+        # 4. 노동위원회 - API가 JSON 대신 HTML 반환하여 수집 불가
+        # labor_commission = self.collect_labor_commission()
+        # self.save_data(
+        #     labor_commission,
+        #     f"labor_commission_{datetime.now().strftime('%Y%m%d')}.json"
+        # )
 
         # 요약 통계
         print("\n" + "="*60)
@@ -436,8 +443,8 @@ class LegalDataCollector:
         print(f"법령해석례:          {len(interpretations):>6}건")
         print(f"판례:                {len(precedents):>6}건")
         print(f"고용노동부 법령해설: {len(labor_ministry):>6}건")
-        print(f"노동위원회 판정례:   {len(labor_commission):>6}건")
-        print(f"총합:                {len(interpretations) + len(precedents) + len(labor_ministry) + len(labor_commission):>6}건")
+        # print(f"노동위원회 판정례:   {len(labor_commission):>6}건")
+        print(f"총합:                {len(interpretations) + len(precedents) + len(labor_ministry):>6}건")
         print("="*60)
 
 
