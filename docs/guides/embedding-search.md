@@ -137,7 +137,7 @@
 ### 1. 스크립트 위치
 
 ```bash
-ai/preprocessing/test_embeddings.py
+ai/preprocessing/test/search.py
 ```
 
 ### 2. 사용 방법
@@ -145,8 +145,8 @@ ai/preprocessing/test_embeddings.py
 **방법 1: 대화형 모드**
 
 ```bash
-cd ai/preprocessing
-python test_embeddings.py i
+cd ai/preprocessing/test
+python search.py i
 ```
 
 대화형 모드에서 쿼리 입력:
@@ -158,15 +158,15 @@ python test_embeddings.py i
 **방법 2: 직접 쿼리**
 
 ```bash
-cd ai/preprocessing
-python test_embeddings.py "수습기간 3개월"
+cd ai/preprocessing/test
+python search.py "수습기간 3개월"
 ```
 
 **방법 3: 사전 정의된 테스트**
 
 ```bash
-cd ai/preprocessing
-python test_embeddings.py t
+cd ai/preprocessing/test
+python search.py t
 ```
 
 8개의 테스트 케이스가 자동 실행됩니다.

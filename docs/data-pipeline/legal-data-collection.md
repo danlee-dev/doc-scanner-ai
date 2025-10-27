@@ -52,8 +52,8 @@ pip install -r requirements.txt
 ### 기본 실행
 
 ```bash
-cd ai/preprocessing
-python collect_legal_data.py
+cd ai/preprocessing/legal
+python 1_collect.py
 ```
 
 ### 수집되는 키워드

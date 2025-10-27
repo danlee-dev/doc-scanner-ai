@@ -31,11 +31,18 @@ ai/
 │       ├── embeddings/
 │       └── required_contract_fields.json
 ├── preprocessing/
-│   ├── pdf_extractor.py
-│   ├── chunker.py
-│   ├── embedder.py
-│   ├── extract_contract_fields.py
-│   └── test_embeddings.py
+│   ├── legal/              # 법률 데이터 파이프라인
+│   │   ├── 1_collect.py
+│   │   ├── 2_chunk.py
+│   │   └── 3_embed.py
+│   ├── pdf/                # PDF 파이프라인
+│   │   ├── 1_extract.py
+│   │   ├── 2_chunk.py
+│   │   └── 3_embed.py
+│   ├── contract/           # 계약서 분석
+│   │   └── extract_fields.py
+│   └── test/               # 테스트
+│       └── search.py
 └── requirements.txt
 ```
 
@@ -82,29 +89,21 @@ ai/
 
 ### 1.2 preprocessing/ - 전처리 스크립트
 
-**pdf_extractor.py**
-- PDF 파일에서 텍스트 추출
-- pdfplumber 사용
-- 페이지별 구분 및 메타데이터 생성
+**legal/** - 법률 데이터 파이프라인
+- `1_collect.py`: 국가법령정보 API로 법률 데이터 수집
+- `2_chunk.py`: 법률 문서 구조 기반 청킹
+- `3_embed.py`: KURE-v1 모델로 법률 데이터 임베딩
 
-**chunker.py**
-- 문서 유형별 청킹 전략 구현
-- 4가지 문서 유형 처리 (manual, employment_rules, guide, leaflet)
-- 메타데이터 자동 생성 (카테고리, 키워드)
+**pdf/** - PDF 문서 파이프라인
+- `1_extract.py`: pdfplumber로 PDF 텍스트 추출
+- `2_chunk.py`: 문서 유형별 청킹 전략 구현
+- `3_embed.py`: KURE-v1 모델로 PDF 청크 임베딩
 
-**embedder.py**
-- KURE-v1 모델 사용
-- 청크 임베딩 생성
-- 성능 테스트 포함
+**contract/** - 계약서 분석
+- `extract_fields.py`: 표준근로계약서 필수 필드 추출 및 체크리스트 생성
 
-**extract_contract_fields.py**
-- 표준근로계약서에서 필수 필드 추출
-- 계약 유형별 체크리스트 생성
-
-**test_embeddings.py**
-- 임베딩 품질 테스트 도구
-- 대화형 검색 모드 지원
-- 필터링 및 유사도 검색
+**test/** - 테스트 도구
+- `search.py`: 통합 임베딩 검색 테스트 (PDF + 법률 데이터)
 
 ### 1.3 requirements.txt
 
@@ -233,14 +232,33 @@ docs/
 
 ## 5. 데이터 흐름
 
+**PDF 파이프라인:**
 ```
 [PDF 파일]
-    ↓ pdf_extractor.py
+    ↓ pdf/1_extract.py
 [추출된 JSON]
-    ↓ chunker.py
-[청크 (674개)]
-    ↓ embedder.py
-[임베딩 벡터 (1024차원)]
+    ↓ pdf/2_chunk.py
+[PDF 청크 (674개)]
+    ↓ pdf/3_embed.py
+[PDF 임베딩 (1024차원)]
+```
+
+**법률 데이터 파이프라인:**
+```
+[국가법령정보 API]
+    ↓ legal/1_collect.py
+[법률 JSON (2,931건)]
+    ↓ legal/2_chunk.py
+[법률 청크 (14,549개)]
+    ↓ legal/3_embed.py
+[법률 임베딩 (1024차원)]
+```
+
+**통합 검색:**
+```
+[PDF 임베딩 + 법률 임베딩]
+    ↓ test/search.py
+[통합 검색 (15,223개 청크)]
     ↓
 [Elasticsearch 인덱스] (예정)
     ↓
@@ -271,20 +289,46 @@ docs/
 
 ### 7.1 데이터 전처리
 
+**PDF 파이프라인:**
 ```bash
-cd ai/preprocessing
+cd ai/preprocessing/pdf
 
 # PDF 추출
-python pdf_extractor.py
+python 1_extract.py
 
 # 청킹
-python chunker.py
+python 2_chunk.py
 
 # 임베딩 생성
-python embedder.py
+python 3_embed.py
+```
 
-# 임베딩 테스트
-python test_embeddings.py interactive
+**법률 데이터 파이프라인:**
+```bash
+cd ai/preprocessing/legal
+
+# 데이터 수집
+python 1_collect.py
+
+# 청킹
+python 2_chunk.py
+
+# 임베딩 생성
+python 3_embed.py
+```
+
+**검색 테스트:**
+```bash
+cd ai/preprocessing/test
+
+# 대화형 모드
+python search.py i
+
+# 사전 정의 테스트
+python search.py t
+
+# 직접 검색
+python search.py "쿼리"
 ```
 
 ### 7.2 프론트엔드

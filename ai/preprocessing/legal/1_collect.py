@@ -460,7 +460,7 @@ def main():
         print("오류: LEGAL_API_USER_ID 환경 변수를 설정해주세요.")
         return
 
-    project_root = Path(__file__).parent.parent
+    project_root = Path(__file__).parent.parent.parent
     output_dir = project_root / "data" / "raw" / "api"
 
     collector = LegalDataCollector(user_id, output_dir)

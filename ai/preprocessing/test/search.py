@@ -294,7 +294,7 @@ class EmbeddingTester:
 if __name__ == "__main__":
     import sys
 
-    project_root = Path(__file__).parent.parent
+    project_root = Path(__file__).parent.parent.parent
     embeddings_dir = project_root / "data" / "processed" / "embeddings"
 
     print("\n" + "="*70)

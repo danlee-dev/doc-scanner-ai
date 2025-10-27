@@ -307,7 +307,7 @@ def main():
     print("="*70)
 
     # 경로 설정
-    project_root = Path(__file__).parent.parent
+    project_root = Path(__file__).parent.parent.parent
     input_dir = project_root / "data" / "raw" / "api"
     output_dir = project_root / "data" / "processed" / "chunks"
     output_dir.mkdir(parents=True, exist_ok=True)

@@ -271,11 +271,25 @@ uvicorn api.main:app --reload --port 8000
 
 ### AI 개발 (공통)
 
+**PDF 파이프라인:**
 ```bash
-cd ai
+cd ai/preprocessing/pdf
 conda activate docscanner-py3.10
-cd preprocessing
-python embedder.py
+python 3_embed.py
+```
+
+**법률 데이터 파이프라인:**
+```bash
+cd ai/preprocessing/legal
+conda activate docscanner-py3.10
+python 3_embed.py
+```
+
+**검색 테스트:**
+```bash
+cd ai/preprocessing/test
+conda activate docscanner-py3.10
+python search.py i
 ```
 
 ## 커뮤니케이션

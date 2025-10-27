@@ -243,7 +243,7 @@ class LegalEmbedder:
 def main():
     """메인 실행 함수"""
     # 경로 설정
-    project_root = Path(__file__).parent.parent
+    project_root = Path(__file__).parent.parent.parent
 
     timestamp = datetime.now().strftime('%Y%m%d')
     chunks_file = project_root / "data" / "processed" / "chunks" / f"legal_chunks_{timestamp}.json"

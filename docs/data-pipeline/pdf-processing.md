@@ -22,7 +22,7 @@
 
 **도구**: pdfplumber
 
-**구현**: `ai/preprocessing/pdf_extractor.py`
+**구현**: `ai/preprocessing/pdf/1_extract.py`
 
 **출력 형식**:
 ```json
@@ -127,12 +127,12 @@ Elasticsearch는 증분 인덱싱을 지원하므로, 기존 데이터를 유지
 
 ### 2.4 구현
 
-**파일**: `ai/preprocessing/chunker.py`
+**파일**: `ai/preprocessing/pdf/2_chunk.py`
 
 **실행**:
 ```bash
-cd ai/preprocessing
-python chunker.py
+cd ai/preprocessing/pdf
+python 2_chunk.py
 ```
 
 **출력**:
@@ -179,12 +179,12 @@ python chunker.py
 
 ### 3.4 구현
 
-**파일**: `ai/preprocessing/embedder.py`
+**파일**: `ai/preprocessing/pdf/3_embed.py`
 
 **실행**:
 ```bash
-cd ai/preprocessing
-python embedder.py
+cd ai/preprocessing/pdf
+python 3_embed.py
 ```
 
 **출력**:
@@ -256,11 +256,18 @@ ai/
 │       │   └── embedding_metadata.json      # 임베딩 정보
 │       └── required_contract_fields.json    # 필수 필드 체크리스트
 └── preprocessing/
-    ├── pdf_extractor.py             # PDF 텍스트 추출
-    ├── chunker.py                   # 청킹 처리
-    ├── embedder.py                  # 임베딩 생성
-    ├── extract_contract_fields.py   # 필수 필드 추출
-    └── test_embeddings.py           # 임베딩 테스트 도구
+    ├── legal/                       # 법률 데이터 파이프라인
+    │   ├── 1_collect.py             # 법률 데이터 수집
+    │   ├── 2_chunk.py               # 법률 데이터 청킹
+    │   └── 3_embed.py               # 법률 데이터 임베딩
+    ├── pdf/                         # PDF 파이프라인
+    │   ├── 1_extract.py             # PDF 텍스트 추출
+    │   ├── 2_chunk.py               # PDF 청킹 처리
+    │   └── 3_embed.py               # PDF 임베딩 생성
+    ├── contract/                    # 계약서 분석
+    │   └── extract_fields.py        # 필수 필드 추출
+    └── test/                        # 테스트
+        └── search.py                # 통합 검색 테스트
 ```
 
 ## 6. 성능 최적화
@@ -318,10 +325,10 @@ tqdm
 
 임베딩 품질 테스트:
 ```bash
-cd ai/preprocessing
-python test_embeddings.py interactive  # 대화형 모드
-python test_embeddings.py test         # 사전 정의 테스트
-python test_embeddings.py "쿼리"       # 직접 검색
+cd ai/preprocessing/test
+python search.py i      # 대화형 모드
+python search.py t      # 사전 정의 테스트
+python search.py "쿼리" # 직접 검색
 ```
 
 ## 9. 변경 이력

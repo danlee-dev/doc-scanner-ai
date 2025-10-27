@@ -128,7 +128,7 @@ class PDFExtractor:
 def main():
     """메인 실행 함수"""
     # 기본 경로 설정
-    base_dir = Path(__file__).parent.parent
+    base_dir = Path(__file__).parent.parent.parent
     input_dir = base_dir / 'data' / 'raw' / 'documents' / 'standard_contracts'
     output_dir = base_dir / 'data' / 'processed' / 'documents' / 'standard_contracts'
 

@@ -11,13 +11,13 @@
 ### 전체 워크플로우
 
 ```
-1. 데이터 수집 (collect_legal_data.py)
+1. 데이터 수집 (legal/1_collect.py)
    국가법령정보 Open API → JSON (2,931건)
 
-2. 데이터 청킹 (chunk_legal_data.py)
+2. 데이터 청킹 (legal/2_chunk.py)
    JSON → 의미 단위 청크 (14,549개)
 
-3. 임베딩 생성 (embed_legal_data.py)
+3. 임베딩 생성 (legal/3_embed.py)
    청크 → KURE-v1 임베딩 (1024차원)
 
 4. Elasticsearch 인덱싱 (다음 단계)
@@ -35,7 +35,7 @@
 
 ### 스크립트
 
-`ai/preprocessing/collect_legal_data.py`
+`ai/preprocessing/legal/1_collect.py`
 
 ### 사용 방법
 
@@ -44,8 +44,8 @@
 LEGAL_API_USER_ID=your_api_key
 
 # 실행
-cd ai/preprocessing
-python collect_legal_data.py
+cd ai/preprocessing/legal
+python 1_collect.py
 ```
 
 ### 수집 키워드 (13개)
@@ -116,13 +116,13 @@ keywords = [
 
 ### 스크립트
 
-`ai/preprocessing/chunk_legal_data.py`
+`ai/preprocessing/legal/2_chunk.py`
 
 ### 사용 방법
 
 ```bash
-cd ai/preprocessing
-python chunk_legal_data.py
+cd ai/preprocessing/legal
+python 2_chunk.py
 ```
 
 ### 청킹 전략
@@ -199,13 +199,13 @@ min_chunk_length = 150   # 최소 청크 길이
 
 ### 스크립트
 
-`ai/preprocessing/embed_legal_data.py`
+`ai/preprocessing/legal/3_embed.py`
 
 ### 사용 방법
 
 ```bash
-cd ai/preprocessing
-python embed_legal_data.py
+cd ai/preprocessing/legal
+python 3_embed.py
 ```
 
 ### 임베딩 모델
@@ -409,9 +409,9 @@ async def search_legal_docs(
 
 ### 스크립트
 
-- `ai/preprocessing/collect_legal_data.py` - 데이터 수집
-- `ai/preprocessing/chunk_legal_data.py` - 데이터 청킹
-- `ai/preprocessing/embed_legal_data.py` - 임베딩 생성
+- `ai/preprocessing/legal/1_collect.py` - 데이터 수집
+- `ai/preprocessing/legal/2_chunk.py` - 데이터 청킹
+- `ai/preprocessing/legal/3_embed.py` - 임베딩 생성
 
 
 ## 문제 해결
@@ -428,7 +428,7 @@ async def search_legal_docs(
 ### 청킹 오류
 
 **문제:** 파일을 찾을 수 없음
-- `collect_legal_data.py`를 먼저 실행했는지 확인
+- `legal/1_collect.py`를 먼저 실행했는지 확인
 - `ai/data/raw/api/` 디렉토리에 파일이 있는지 확인
 
 ### 임베딩 오류
