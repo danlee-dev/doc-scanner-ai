@@ -102,3 +102,29 @@ body {
     @apply border px-4 py-2 text-left [&[align=center]]:text-center [&[align=right]]:text-right;
   }
 }
+
+/* PDF 텍스트 레이어 스타일 */
+.textLayer {
+  position: absolute;
+  text-align: initial;
+  inset: 0;
+}
+
+.textLayer span,
+.textLayer br {
+  color: transparent;
+  position: absolute;
+  white-space: pre;
+  cursor: text;
+  transform-origin: 0% 0%;
+}
+
+.textLayer span::selection {
+  background: rgba(0, 123, 255, 0.3);
+  color: #000;
+}
+
+.textLayer span::-moz-selection {
+  background: rgba(0, 123, 255, 0.3);
+  color: #000;
+}
