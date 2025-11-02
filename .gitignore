@@ -89,3 +89,4 @@ coverage/
 *.swp
 *.swo
 *~
+temp_img/
