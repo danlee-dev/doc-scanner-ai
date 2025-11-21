@@ -3,7 +3,6 @@
 import { Sidebar } from "@/components/ui/sidebar"
 import {
   Home,
-  Upload,
   FileText,
   GitCompare,
   Settings,
@@ -17,9 +16,9 @@ const sidebarItems = [
     icon: Home,
   },
   {
-    title: "계약서 업로드",
-    href: "/upload",
-    icon: Upload,
+    title: "계약서 분석",
+    href: "/analysis/test-contract-001",
+    icon: FileText,
   },
   {
     title: "계약서 목록",

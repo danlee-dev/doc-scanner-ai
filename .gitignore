@@ -1,6 +1,7 @@
 # IDE
 .vscode/
 .idea/
+.claude/
 
 # OS
 .DS_Store
@@ -88,3 +89,4 @@ coverage/
 *.swp
 *.swo
 *~
+temp_img/
